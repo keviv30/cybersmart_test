@@ -1,6 +1,6 @@
 import pytest
 from django.contrib.auth.models import User
-from todo_app.models import Task, Location
+from tasks_app.models import Task, Location
 
 
 @pytest.mark.django_db
@@ -15,7 +15,7 @@ def test_create_task():
         title="Test Task",
         description="Test Task",
         completed=False,
-        location=location
+        location=location,
     )
 
     # Assertions
