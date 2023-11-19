@@ -1,3 +1,10 @@
-from django.shortcuts import render
+import logging
+from tasks_app.serializers import TaskSerializer
+from rest_framework import generics
 
-# Create your views here.
+
+class ListCreateTasksView(generics.ListCreateAPIView):
+    serializer_class = TaskSerializer
+
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)

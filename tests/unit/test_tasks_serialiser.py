@@ -52,4 +52,3 @@ def test_location_serializer():
 
     # Verify the created instance
     assert new_location.name == "New Test Location"
-

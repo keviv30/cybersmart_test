@@ -15,7 +15,7 @@ def test_create_task():
     client = APIClient()
     client.force_authenticate(user=user)
     url = reverse(
-        "task-list"
+        "tasks-list-create"
     )  # Update with the correct URL name for task creation
     data = {
         "owner": user.id,
