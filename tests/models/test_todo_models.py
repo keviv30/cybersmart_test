@@ -1,6 +1,6 @@
 import pytest
 from django.contrib.auth.models import User
-from todo_app.models import Task
+from todo_app.models import Task, Location
 
 
 @pytest.mark.django_db
