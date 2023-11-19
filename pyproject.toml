@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "cybersmart-test"
+version = "0.1.0"
+description = ""
+authors = ["Vivek Santhirababu <vivek.santhirababu@kaizenreporting.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "cybersmart_test"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "4.2.6"
+djangorestframework = "3.14.0"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "1.5.1"
+black = "23.9.1"
+isort = "5.12.0"
+pytest-django = "4.5.2"
+
+[tool.black]
+line-length = 79
+target-version = ["py38", "py39", "py310"]
+exclude = 'settings\.py|urls\.py'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
