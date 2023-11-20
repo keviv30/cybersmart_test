@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from tasks_app.models import Task, Location
+
+from tasks_app.models import Location, Task
 
 
 class TaskSerializer(serializers.ModelSerializer):

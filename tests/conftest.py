@@ -1,7 +1,8 @@
 import pytest
 from django.contrib.auth.models import User
-from tasks_app.models import Task, Location
 from rest_framework.test import APIClient, APIRequestFactory
+
+from tasks_app.models import Location, Task
 
 
 @pytest.fixture
