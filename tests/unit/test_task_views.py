@@ -102,3 +102,33 @@ def test_update_task(
     updated_task = Task.objects.get(id=test_task.id)
     assert updated_task.description == "Updated Task"
     assert updated_task.completed is True
+
+
+@pytest.mark.django_db
+def test_delete_task(
+    factory: APIRequestFactory, test_user, create_task, sample_location
+):
+    # Given
+    test_task = create_task(
+        owner=test_user,
+        title="Test Task 1",
+        description="Test Task 1",
+        completed=False,
+        location=sample_location,
+    )
+
+    url = reverse(
+        "tasks-retrieve-update-destroy",
+        kwargs={"pk": test_task.id},
+    )
+
+    view = RetrieveUpdateDestroyTasksView.as_view()
+
+    # When
+    request = factory.delete(url)
+    response = view(request, pk=test_task.id)
+
+    # Then
+    assert response.status_code == 204
+    with pytest.raises(Task.DoesNotExist):
+        Task.objects.get(id=test_task.id)
