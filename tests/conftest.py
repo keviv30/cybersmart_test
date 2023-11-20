@@ -1,7 +1,17 @@
 import pytest
 from django.contrib.auth.models import User
+from tasks_app.models import Task, Location
+from rest_framework.test import APIClient, APIRequestFactory
 
-from tasks_app.models import Task
+
+@pytest.fixture
+def api_client():
+    return APIClient()
+
+
+@pytest.fixture
+def factory():
+    return APIRequestFactory()
 
 
 @pytest.fixture
@@ -19,3 +29,9 @@ def create_task():
         return Task.objects.create(**kwargs)
 
     return _create_task
+
+
+@pytest.fixture
+@pytest.mark.django_db
+def sample_location():
+    return Location.objects.create(name="London")

@@ -5,14 +5,7 @@ from tasks_app.models import Task, Location
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = [
-            "id",
-            "owner",
-            "title",
-            "description",
-            "completed",
-            "location",
-        ]
+        fields = "__all__"
 
 
 class LocationSerializer(serializers.ModelSerializer):
