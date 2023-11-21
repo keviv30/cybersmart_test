@@ -11,6 +11,8 @@ packages = [{include = "cybersmart_test"}]
 python = "^3.11"
 django = "4.2.6"
 djangorestframework = "3.14.0"
+requests = "2.31.0"
+python-dotenv = "1.0.0"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "1.5.1"
