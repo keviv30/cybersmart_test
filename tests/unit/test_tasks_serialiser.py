@@ -1,8 +1,43 @@
+from typing import Callable
+from unittest.mock import patch
+
 import pytest
 from django.contrib.auth.models import User
 
 from tasks_app.models import Location, Task
 from tasks_app.serializers import LocationSerializer, TaskSerializer
+
+
+@pytest.mark.django_db
+def test_task_serializer_fields(
+    create_task: Callable[[], Task], test_user: User, sample_location: Location
+):
+    with patch("tasks_app.serializers.get_weather_data") as mock_get_weather:
+        # Setup mock return value
+        mock_get_weather.return_value = {
+            "weather": [{"main": "Clear"}],
+            "main": {"temp": 15},
+        }
+
+        # Given
+        task = create_task(
+            owner=test_user,
+            title="Test Task 1",
+            description="Test Task 1",
+            completed=False,
+            location=sample_location,
+        )
+
+        # When
+        serializer = TaskSerializer(instance=task)
+
+        # Then
+        assert "id" in serializer.data
+        assert "description" in serializer.data
+        assert "completed" in serializer.data
+        assert "location" in serializer.data
+        assert "background_color" in serializer.data["weather_data"]
+        assert "temperature" in serializer.data["weather_data"]
 
 
 @pytest.mark.django_db
