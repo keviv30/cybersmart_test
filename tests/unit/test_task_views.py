@@ -3,7 +3,7 @@ from typing import Callable
 import pytest
 from django.contrib.auth.models import User
 from django.urls import reverse
-from rest_framework.test import APIRequestFactory
+from rest_framework.test import APIRequestFactory, force_authenticate
 
 from tasks_app.models import Location, Task
 from tasks_app.views import ListCreateTasksView, RetrieveUpdateDestroyTasksView
@@ -28,6 +28,7 @@ def test_create_task(test_user: User, factory: APIRequestFactory) -> None:
 
     # When
     request = factory.post(url, data)
+    force_authenticate(request, user=test_user)
     response = view(request)
 
     # Then
@@ -38,6 +39,7 @@ def test_create_task(test_user: User, factory: APIRequestFactory) -> None:
 @pytest.mark.django_db
 def test_retrieve_tasks(
     test_user: User,
+    sample_location: Location,
     create_task: Callable[[], Task],
     factory: APIRequestFactory,
 ) -> None:
@@ -47,12 +49,14 @@ def test_retrieve_tasks(
         title="Test Task 1",
         description="Test Task 1",
         completed=False,
+        location=sample_location,
     )
     create_task(
         owner=test_user,
         title="Test Task 2",
         description="Test Task 2",
         completed=False,
+        location=sample_location,
     )
 
     url = reverse(
@@ -63,6 +67,7 @@ def test_retrieve_tasks(
 
     # When
     request = factory.get(url, format="json")
+    force_authenticate(request, user=test_user)
     response = view(request)
 
     # Then
@@ -96,6 +101,7 @@ def test_update_task(
 
     # When
     request = factory.patch(url, updated_task)
+    force_authenticate(request, user=test_user)
     response = view(request, pk=test_task.id)
 
     # Then
@@ -127,6 +133,7 @@ def test_delete_task(
 
     # When
     request = factory.delete(url)
+    force_authenticate(request, user=test_user)
     response = view(request, pk=test_task.id)
 
     # Then
