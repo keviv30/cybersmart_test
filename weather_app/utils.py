@@ -6,10 +6,10 @@ from .exceptions import WeatherDataFetchError
 
 
 def get_weather_data(location_name: str) -> dict:
-    api_key = str(os.getenv("SECRET_KEY"))
+    api_key = str(os.getenv("WEATHER_API_KEY"))
     try:
         response = requests.get(
-            f"http://api.openweathermap.org/data/2.5/weather?q={location_name}&appid={api_key}"
+            f"http://api.openweathermap.org/data/2.5/weather?q={location_name}&units=metric&appid={api_key}"
         )
         response.raise_for_status()
         return response.json()
