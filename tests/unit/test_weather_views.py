@@ -8,7 +8,7 @@ from unittest.mock import patch
 @pytest.mark.django_db
 def test_weather_data_view_success() -> None:
     # Mock the get_weather_data function
-    with patch("weather_app.utils.get_weather_data") as mock_get_weather:
+    with patch("weather_app.views.get_weather_data") as mock_get_weather:
         # Setup mock return value
         mock_get_weather.return_value = {
             "weather": [{"main": "Clear"}],
