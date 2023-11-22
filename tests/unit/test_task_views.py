@@ -3,7 +3,7 @@ from typing import Callable
 import pytest
 from django.contrib.auth.models import User
 from django.urls import reverse
-from rest_framework.test import APIRequestFactory, force_authenticate
+from rest_framework.test import APIRequestFactory
 
 from tasks_app.models import Location, Task
 from tasks_app.views import ListCreateTasksView, RetrieveUpdateDestroyTasksView
@@ -28,7 +28,6 @@ def test_create_task(test_user: User, factory: APIRequestFactory) -> None:
 
     # When
     request = factory.post(url, data)
-    force_authenticate(request, user=test_user)
     response = view(request)
 
     # Then
@@ -67,7 +66,6 @@ def test_retrieve_tasks(
 
     # When
     request = factory.get(url, format="json")
-    force_authenticate(request, user=test_user)
     response = view(request)
 
     # Then
@@ -101,7 +99,6 @@ def test_update_task(
 
     # When
     request = factory.patch(url, updated_task)
-    force_authenticate(request, user=test_user)
     response = view(request, pk=test_task.id)
 
     # Then
@@ -133,7 +130,6 @@ def test_delete_task(
 
     # When
     request = factory.delete(url)
-    force_authenticate(request, user=test_user)
     response = view(request, pk=test_task.id)
 
     # Then
