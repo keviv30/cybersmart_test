@@ -7,6 +7,10 @@ from weather_app.utils import get_weather_data
 
 class TaskSerializer(serializers.ModelSerializer):
     weather_data = serializers.SerializerMethodField()
+    location = serializers.CharField(
+        source="location.name",
+        read_only=True
+    )
 
     class Meta:
         model = Task
