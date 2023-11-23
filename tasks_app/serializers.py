@@ -12,6 +12,17 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = "__all__"
 
+    def validate(self, data):
+        """
+        Check location constraints on the Task.
+        """
+        # Ensure that a location is specified for non-completed tasks
+        if not data.get("completed") and not data.get("location"):
+            raise serializers.ValidationError(
+                "Location must be specified for active tasks."
+            )
+        return data
+
     def get_weather_data(self, obj):
         weather_data = get_weather_data(obj.location.name)
 

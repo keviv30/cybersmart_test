@@ -39,12 +39,13 @@ def test_task_serializer_fields(
 
 
 @pytest.mark.django_db
-def test_task_serializer():
+def test_task_serializer(sample_location: Location):
     # Given
     task_data = {
         "title": "Test Task",
         "description": "Test Task",
         "completed": False,
+        "location": sample_location.id,
     }
 
     # When
@@ -81,3 +82,19 @@ def test_location_serializer():
 
     # Verify the created instance
     assert new_location.name == "New Test Location"
+
+
+@pytest.mark.django_db
+def test_validate_location_for_active_task():
+    """
+    Test that the serializer requires a location for active (non-completed) tasks.
+    """
+    invalid_data = {
+        "title": "Task without location",
+        "description": "Task without location",
+        "completed": False,
+    }
+
+    serializer = TaskSerializer(data=invalid_data)
+    assert not serializer.is_valid()
+    assert "non_field_errors" in serializer.errors
