@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "cybersmart-test"
+name = "cybersmart_test"
 version = "0.1.0"
 description = ""
 authors = ["Vivek Santhirababu <vivek.santhirababu@kaizenreporting.com>"]
