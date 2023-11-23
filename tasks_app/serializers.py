@@ -7,10 +7,7 @@ from weather_app.utils import get_weather_data
 
 class TaskSerializer(serializers.ModelSerializer):
     weather_data = serializers.SerializerMethodField()
-    location = serializers.CharField(
-        source="location.name",
-        read_only=True
-    )
+    location_choices = serializers.SerializerMethodField()
 
     class Meta:
         model = Task
@@ -23,6 +20,15 @@ class TaskSerializer(serializers.ModelSerializer):
             "background_color": determine_background_color(weather_data),
             "temperature": weather_data["main"]["temp"],
         }
+
+    def get_location_choices(self, obj):
+        return [
+            {
+                "id": location.id,
+                "name": location.name,
+            }
+            for location in Location.objects.all()
+        ]
 
 
 class LocationSerializer(serializers.ModelSerializer):

@@ -10,14 +10,13 @@ from tasks_app.views import ListCreateTasksView, RetrieveUpdateDestroyTasksView
 
 
 @pytest.mark.django_db
-def test_create_task(test_user: User, factory: APIRequestFactory) -> None:
+def test_create_task(factory: APIRequestFactory) -> None:
     # Given
     location = Location.objects.create(name="London")
     url = reverse(
         "tasks-list-create"
     )  # Update with the correct URL name for task creation
     data = {
-        "owner": test_user.id,
         "title": "Test Task",
         "description": "Test Task description",
         "completed": False,
@@ -37,21 +36,18 @@ def test_create_task(test_user: User, factory: APIRequestFactory) -> None:
 
 @pytest.mark.django_db
 def test_retrieve_tasks(
-    test_user: User,
     sample_location: Location,
     create_task: Callable[[], Task],
     factory: APIRequestFactory,
 ) -> None:
     # Given
     create_task(
-        owner=test_user,
         title="Test Task 1",
         description="Test Task 1",
         completed=False,
         location=sample_location,
     )
     create_task(
-        owner=test_user,
         title="Test Task 2",
         description="Test Task 2",
         completed=False,
@@ -76,13 +72,11 @@ def test_retrieve_tasks(
 @pytest.mark.django_db
 def test_update_task(
     factory: APIRequestFactory,
-    test_user: User,
     create_task: Callable[[], Task],
     sample_location: Location,
 ) -> None:
     # Given
     test_task = create_task(
-        owner=test_user,
         title="Test Task 1",
         description="Test Task 1",
         completed=False,
@@ -109,12 +103,9 @@ def test_update_task(
 
 
 @pytest.mark.django_db
-def test_delete_task(
-    factory: APIRequestFactory, test_user, create_task, sample_location
-):
+def test_delete_task(factory: APIRequestFactory, create_task, sample_location):
     # Given
     test_task = create_task(
-        owner=test_user,
         title="Test Task 1",
         description="Test Task 1",
         completed=False,

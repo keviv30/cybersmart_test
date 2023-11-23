@@ -1,5 +1,4 @@
 import pytest
-from django.contrib.auth.models import User
 
 from tasks_app.models import Location, Task
 
@@ -7,12 +6,10 @@ from tasks_app.models import Location, Task
 @pytest.mark.django_db
 def test_create_task():
     # Setup test data
-    user = User.objects.create_user(username="testuser", password="12345")
     location = Location.objects.create(name="Home")
 
     # Create a Task instance
     task = Task.objects.create(
-        owner=user,
         title="Test Task",
         description="Test Task",
         completed=False,
@@ -20,7 +17,6 @@ def test_create_task():
     )
 
     # Assertions
-    assert task.owner == user
     assert task.description == "Test Task"
     assert task.completed is False
     assert task.location == location

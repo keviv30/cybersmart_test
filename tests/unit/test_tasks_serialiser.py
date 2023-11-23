@@ -2,7 +2,6 @@ from typing import Callable
 from unittest.mock import patch
 
 import pytest
-from django.contrib.auth.models import User
 
 from tasks_app.models import Location, Task
 from tasks_app.serializers import LocationSerializer, TaskSerializer
@@ -10,7 +9,7 @@ from tasks_app.serializers import LocationSerializer, TaskSerializer
 
 @pytest.mark.django_db
 def test_task_serializer_fields(
-    create_task: Callable[[], Task], test_user: User, sample_location: Location
+    create_task: Callable[[], Task], sample_location: Location
 ):
     with patch("tasks_app.serializers.get_weather_data") as mock_get_weather:
         # Setup mock return value
@@ -21,7 +20,6 @@ def test_task_serializer_fields(
 
         # Given
         task = create_task(
-            owner=test_user,
             title="Test Task 1",
             description="Test Task 1",
             completed=False,
@@ -43,11 +41,7 @@ def test_task_serializer_fields(
 @pytest.mark.django_db
 def test_task_serializer():
     # Given
-    test_user = User.objects.create_user(
-        username="testuser", password="testpass123"
-    )
     task_data = {
-        "owner": test_user.id,
         "title": "Test Task",
         "description": "Test Task",
         "completed": False,
@@ -64,7 +58,6 @@ def test_task_serializer():
     task_obj = Task.objects.get()
     assert task_obj.description == "Test Task"
     assert task_obj.completed is False
-    assert task_obj.owner == test_user
 
 
 @pytest.mark.django_db

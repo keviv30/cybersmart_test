@@ -1,6 +1,5 @@
 from typing import List
 
-from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 
 from tasks_app.models import Task, Location
@@ -12,13 +11,11 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         print("Clearing database")
 
-        User.objects.all().delete()
         Task.objects.all().delete()
         Location.objects.all().delete()
 
         # Add sample data
-        print("Adding sample user and locations")
-        User.objects.create_user(username="Testuser", password="testpass123")
+        print("Adding sample locations")
 
         locations: List[Location] = list()
         for location in ["London", "Paris", "Berlin", "Tokyo", "Singapore"]:

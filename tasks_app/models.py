@@ -10,7 +10,6 @@ class Location(models.Model):
 
 
 class Task(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
     description = models.TextField()
     completed = models.BooleanField(default=False)
