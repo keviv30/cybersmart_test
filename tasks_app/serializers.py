@@ -7,7 +7,6 @@ from weather_app.utils import get_weather_data
 
 class TaskSerializer(serializers.ModelSerializer):
     weather_data = serializers.SerializerMethodField()
-    location_choices = serializers.SerializerMethodField()
 
     class Meta:
         model = Task
@@ -21,17 +20,8 @@ class TaskSerializer(serializers.ModelSerializer):
             "temperature": weather_data["main"]["temp"],
         }
 
-    def get_location_choices(self, obj):
-        return [
-            {
-                "id": location.id,
-                "name": location.name,
-            }
-            for location in Location.objects.all()
-        ]
-
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
-        fields = ["id", "name"]
+        fields = "__all__"

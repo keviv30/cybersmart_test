@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 
 @pytest.mark.django_db
-def test_weather_data_view_success() -> None:
+def test_weather_data_view_success(client: APIClient) -> None:
     # Mock the get_weather_data function
     with patch("weather_app.views.get_weather_data") as mock_get_weather:
         # Setup mock return value
@@ -15,7 +15,6 @@ def test_weather_data_view_success() -> None:
             "main": {"temp": 15},
         }
 
-        client = APIClient()
         response = client.get(
             reverse("weather-data", kwargs={"location_name": "London"})
         )

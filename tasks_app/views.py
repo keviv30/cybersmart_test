@@ -1,7 +1,7 @@
 from rest_framework import generics
 
-from tasks_app.models import Task
-from tasks_app.serializers import TaskSerializer
+from tasks_app.models import Task, Location
+from tasks_app.serializers import TaskSerializer, LocationSerializer
 
 
 class ListCreateTasksView(generics.ListCreateAPIView):
@@ -15,3 +15,8 @@ class ListCreateTasksView(generics.ListCreateAPIView):
 class RetrieveUpdateDestroyTasksView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TaskSerializer
     queryset = Task.objects.all()
+
+
+class ListLocationView(generics.ListAPIView):
+    serializer_class = LocationSerializer
+    queryset = Location.objects.all()
