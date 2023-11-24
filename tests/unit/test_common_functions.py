@@ -9,7 +9,7 @@ from common import determine_background_color
         ({"weather": [{"main": "Snow"}]}, "blue"),
         ({"weather": [{"main": "Rain"}]}, "blue"),
         ({"weather": [{"main": "Clear"}]}, "red"),
-        ({"weather": [{"main": "Clouds"}]}, "yellow-orange"),
+        ({"weather": [{"main": "Clouds"}]}, "orange"),
         (
             {"weather": [{"main": "Mist"}]},
             "gray",
