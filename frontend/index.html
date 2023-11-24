@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>
+      </title>
+      <link rel="stylesheet" href="style.css">
+   </head>
+   <body>
+      <div class="two">
+         <h1>CyberSmart
+            <span>TODO List Application</span>
+         </h1>
+      </div>
+      <div class="container">
+         <div class="two">
+            <h1>
+               <span>Available Task Lists</span>
+            </h1>
+         </div>
+         <div id="taskList" >
+
+
+         </div>
+         </div>
+      <!-- Edit Task Form -->
+      <div id="editTaskForm1" style="display: none;">
+         <div class="two">
+            <h1>
+               <span>Edit Task</span>
+            </h1>
+         </div>
+         <!-- Form content goes here -->
+      </div>
+      <div class="container">
+         <div id="newTask" class="two">
+            <h1>
+               <span>Create A New Task</span>
+            </h1>
+             <br/>
+             <form id="taskForm" name="Submit a new task">
+                  <label for="title">Title:</label>
+                <input type="text" id="title" name="title" placeholder="Your Tittle.." required>
+
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description" placeholder="Your description.." required>
+                <label for="location">Location:</label>
+                <select id="location" name="location" required>
+                   <!-- Options populated via JavaScript -->
+                </select>
+                <input id="createTaskButton" type="submit" value="Create Task" >
+             </form>
+         </div>
+      </div>
+      <script src="script.js"></script>
+   </body>
+</html>
