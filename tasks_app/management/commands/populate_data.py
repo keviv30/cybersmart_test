@@ -2,7 +2,7 @@ from typing import List
 
 from django.core.management.base import BaseCommand
 
-from tasks_app.models import Task, Location
+from tasks_app.models import Location, Task
 
 
 class Command(BaseCommand):

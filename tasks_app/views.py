@@ -1,7 +1,7 @@
 from rest_framework import generics
 
-from tasks_app.models import Task, Location
-from tasks_app.serializers import TaskSerializer, LocationSerializer
+from tasks_app.models import Location, Task
+from tasks_app.serializers import LocationSerializer, TaskSerializer
 
 
 class ListCreateTasksView(generics.ListCreateAPIView):

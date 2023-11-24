@@ -2,8 +2,9 @@ import pytest
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIRequestFactory
-from tasks_app.views import ListLocationView
+
 from tasks_app.models import Location
+from tasks_app.views import ListLocationView
 
 
 @pytest.mark.django_db

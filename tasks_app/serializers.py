@@ -1,20 +1,19 @@
 from rest_framework import serializers
 
-from tasks_app.models import Location, Task
 from common import determine_background_color
+from tasks_app.models import Location, Task
 from weather_app.utils import get_weather_data
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    """ Serializer for the Task model. """
+    """Serializer for the Task model."""
+
     location_details = serializers.SerializerMethodField()
 
     class Meta:
         model = Task
         fields = "__all__"
-        extra_kwargs = {
-            'location': {'write_only': True}
-        }
+        extra_kwargs = {"location": {"write_only": True}}
 
     def get_location_details(self, obj):
         weather_data = get_weather_data(obj.location.name)
@@ -36,7 +35,6 @@ class TaskSerializer(serializers.ModelSerializer):
                 "Location must be specified for active tasks."
             )
         return data
-
 
 
 class LocationSerializer(serializers.ModelSerializer):

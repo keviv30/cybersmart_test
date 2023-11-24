@@ -1,5 +1,6 @@
 # test_weather.py
 import pytest
+
 from common import determine_background_color
 
 

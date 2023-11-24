@@ -1,12 +1,13 @@
 # views.py
 
+from rest_framework import status
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
-from rest_framework import status
 
 from common import determine_background_color
-from .utils import get_weather_data
+
 from .exceptions import WeatherDataFetchError
+from .utils import get_weather_data
 
 
 class WeatherDataView(RetrieveAPIView):
