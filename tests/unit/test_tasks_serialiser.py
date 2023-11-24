@@ -33,9 +33,9 @@ def test_task_serializer_fields(
         assert "id" in serializer.data
         assert "description" in serializer.data
         assert "completed" in serializer.data
-        assert "location" in serializer.data
-        assert "background_color" in serializer.data["weather_data"]
-        assert "temperature" in serializer.data["weather_data"]
+        assert "location_details" in serializer.data
+        assert "background_color" in serializer.data["location_details"]
+        assert "temperature" in serializer.data["location_details"]
 
 
 @pytest.mark.django_db

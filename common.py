@@ -5,6 +5,6 @@ def determine_background_color(weather_data: dict) -> str:
     elif main_weather in ["clear"]:
         return "red"
     elif main_weather in ["clouds"]:
-        return "yellow-orange"
+        return "orange"
     else:
         return "gray"  # default color
