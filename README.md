@@ -33,6 +33,10 @@ Before you begin, ensure you have met the following requirements:
 - black
 - isort
 - pytest-django
+- djangorestframework
+- request
+- python-dotenv
+- django-cors-headers
 
 ### Backend Setup
 1. **Clone the Repository**
