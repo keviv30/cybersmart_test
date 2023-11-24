@@ -177,4 +177,6 @@ We can add the following improvements to the project:
 - Provide more validation for the task requests.
 - Production deployment using docker-compose and Github action.
 - Configure docker-compose.prod.yml file for production deployment.
+- Add custom logger to log the requests
+- Add api to filter task by location (could use custom model manager)
 - Move frontend outside the backend directory

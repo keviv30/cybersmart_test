@@ -15,7 +15,7 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = "__all__"
         extra_kwargs = {"location": {"write_only": True}}
 
-    def get_location_details(self, obj):
+    def get_location_details(self, obj: Task) -> dict:
         weather_data = get_weather_data(obj.location.name)
 
         return {
@@ -25,7 +25,7 @@ class TaskSerializer(serializers.ModelSerializer):
             "background_color": determine_background_color(weather_data),
         }
 
-    def validate(self, data):
+    def validate(self, data: dict) -> dict:
         """
         Check location constraints on the Task.
         """
